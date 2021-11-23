@@ -8,17 +8,28 @@ screen = Screen()
 screen.setup(width=600, height=600)
 screen.tracer(0)
 all_the_cars = []
-manager = CarManager()
+# manager = CarManager()
+running = True
 
 
+def car_creator():
+    if running:
+        car = CarManager()
+        return car
 
+times = 0
 
 game_is_on = True
+
+
 while game_is_on:
+    times += 1
     time.sleep(0.1)
     screen.update()
-    manager.car_creator()
-    screen.ontimer(car_creator(), 1000)
-    all_the_cars.append(car_creator())
+    if times % 7 == 0:
+       all_the_cars.append(car_creator())
     for car in all_the_cars:
-        car_creator().cars_move()
+        car.cars_move()
+
+
+
